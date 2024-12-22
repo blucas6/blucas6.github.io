@@ -1,0 +1,39 @@
+main {
+    display: flex;
+    gap: 20px;
+}
+
+.box {
+    border-radius: 50px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  22px 22px 44px #bebebe,
+                 -22px -22px 44px #ffffff;
+    overflow: hidden;
+    padding: 20px;
+    transition: box-shadow 2s ease;
+}
+
+.box:hover {
+    box-shadow:  22px 22px 44px #7a7373,
+    -22px -22px 44px #fff5f5;
+}
+
+.about_section {
+    width: 25vw;
+}
+
+.board_section {
+    width: 75vw;
+}
+
+.profile_pic {
+    border-radius: 30px;
+    width: 130px;
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+p {
+    text-align: justify;
+    text-indent: 1em;
+}
