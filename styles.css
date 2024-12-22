@@ -1,5 +1,6 @@
 main {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -19,11 +20,11 @@ main {
 }
 
 .about_section {
-    width: 25vw;
+    width: 100%;
 }
 
 .board_section {
-    width: 75vw;
+    width: 100%;
 }
 
 .profile_pic {
@@ -36,4 +37,13 @@ main {
 p {
     text-align: justify;
     text-indent: 1em;
+}
+
+@media (min-width: 500px) {
+    .about_section {
+        flex: 1 1 20%;
+    }
+    .board_section {
+        flex: 1 1 70%;
+    }
 }
