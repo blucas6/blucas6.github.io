@@ -6,26 +6,31 @@ body {
 main {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
 }
 
 .box {
     border-radius: 50px;
-    background: linear-gradient(145deg, #f0f0f0, #cacaca);
-    box-shadow:  22px 22px 44px #bebebe,
-                 -22px -22px 44px #ffffff;
+    background: #EBEAEF;
+    box-shadow: inset 14px 14px 28px #c8c7cb,
+                inset -14px -14px 28px #ffffff;
     overflow: hidden;
     padding: 20px;
     transition: box-shadow 2s ease;
+    width: 200px;
+    text-align: center;
 }
 
 .box:hover {
-    box-shadow:  22px 22px 44px #7a7373,
-    -22px -22px 44px #fff5f5;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #fbfaff, #d4d3d7);
+    box-shadow:  14px 14px 28px #c8c7cb,
+                 -14px -14px 28px #ffffff;
 }
 
 .about_section {
     width: 100%;
+    text-align: justify;
 }
 
 .board_section {
@@ -37,11 +42,6 @@ main {
     width: 130px;
     float: left;
     margin: 0 20px 20px 0;
-}
-
-p {
-    text-align: justify;
-    text-indent: 1em;
 }
 
 @media (min-width: 500px) {
