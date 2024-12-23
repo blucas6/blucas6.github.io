@@ -18,10 +18,12 @@ main {
     padding: 20px;
     transition: box-shadow 2s ease;
     width: 200px;
+    height: 200px;
+    margin: 10px;
     text-align: center;
 }
 
-.box:hover {
+#box:hover {
     border-radius: 50px;
     background: linear-gradient(145deg, #fbfaff, #d4d3d7);
     box-shadow:  14px 14px 28px #c8c7cb,
@@ -35,6 +37,11 @@ main {
 
 .board_section {
     width: 100%;
+}
+
+#board_area {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .profile_pic {
