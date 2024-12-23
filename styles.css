@@ -58,4 +58,7 @@ main {
     .board_section {
         flex: 1 1 70%;
     }
+    .box {
+        width: 100%;
+    }
 }

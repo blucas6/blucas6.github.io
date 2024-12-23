@@ -5,7 +5,6 @@ const boxClassName = 'box';
 
 var savedDivs = [];
 
-
 // Go through a users github and add each project to the website
 // ----------------------------------------
 // projectDiv: where the content info should be placed
