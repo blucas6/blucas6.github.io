@@ -61,7 +61,7 @@ main {
 
 .neu_button {
     border-radius: 50px;
-    background: #EBEAEF;
+    background: linear-gradient(145deg, #fbfaff, #d4d3d7);
     box-shadow:  9px 9px 18px #c8c7cb,
                  -9px -9px 18px #ffffff;
     text-align: center;
@@ -80,9 +80,9 @@ main {
 
 .neu_button_pressed {
     border-radius: 50px;
-    background: #EBEAEF;
-    box-shadow: inset 9px 9px 18px #c8c7cb,
-                inset -9px -9px 18px #ffffff;
+    background: linear-gradient(145deg, #d4d3d7, #fbfaff);
+    box-shadow:  9px 9px 18px #c8c7cb,
+                 -9px -9px 18px #ffffff;
     text-align: center;
     align-items: center;
     padding: 10px 20px 10px 20px;
