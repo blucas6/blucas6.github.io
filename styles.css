@@ -17,6 +17,7 @@ main {
     padding: 20px;
     transition: box-shadow 2s ease;
     width: 100%;
+    height: 200px;
     margin: 10px;
     text-align: center;
 }
