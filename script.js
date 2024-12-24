@@ -117,13 +117,13 @@ function appendAllSavedRepos(projectDiv)
 function reOrderRepos()
 {
     var projectDiv = document.getElementById(projectArea);
+    sortRepos();
     // make sure we have the div
     if (!projectDiv)
     {
         console.log(`No such thing as ${projectArea}`);
         return;
     }
-    sortRepos();
     appendAllSavedRepos(projectDiv);
 }
 
@@ -146,12 +146,12 @@ function sortRepos()
     var sortbutton = document.getElementById('sortbutton');
     if (orderByDescending)
     {
-        sortbutton.innerHTML = '&darr;';
+        sortbutton.innerHTML = "<i class='fas fa-angle-down' style='font-size:24px'></i>";
         sortbutton.className = 'neu_button_pressed';
     }
     else
     {
-        sortbutton.innerHTML = '&uarr;'
+        sortbutton.innerHTML = "<i class='fas fa-angle-up' style='font-size:24px'></i>";
         sortbutton.className = 'neu_button';
     }
     orderByDescending = !orderByDescending;
