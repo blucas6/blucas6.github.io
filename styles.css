@@ -1,3 +1,4 @@
+/* GLOBAL ----------------------------------------------------------*/
 body {
     font-family: 'Nunito Sans';
     background-color: #EBEAEF;
@@ -9,6 +10,14 @@ main {
     gap: 50px;
 }
 
+a {
+    color: inherit; /* Inherit the text color from the parent */
+    text-decoration: none; /* Remove underline */
+}
+/*------------------------------------------------------------------*/
+
+/* Neumorphism */
+/* Box -------------------------------------------------------------*/
 .box {
     border-radius: 50px;
     background: #EBEAEF;
@@ -18,7 +27,6 @@ main {
     transition: box-shadow 2s ease;
     width: 100%;
     margin: 10px;
-    text-align: center;
 }
 
 #box:hover {
@@ -28,37 +36,7 @@ main {
                  -14px -14px 28px #ffffff;
 }
 
-.about_section {
-    width: 100%;
-    text-align: justify;
-    overflow: hidden;
-}
-
-.board_section {
-    width: 100%;
-}
-
-#board_area {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#repoClass {
-    height: 200px;
-}
-
-.profile_pic {
-    border-radius: 30px;
-    width: 130px;
-    float: left;
-    margin: 0 20px 20px 0;
-}
-
-.board_header {
-    display: flex;
-    flex-wrap: wrap;
-}
-
+/* Button ----------------------------------------------------------*/
 .neu_button {
     border-radius: 50px;
     background: linear-gradient(145deg, #fbfaff, #d4d3d7);
@@ -66,12 +44,13 @@ main {
                  -9px -9px 18px #ffffff;
     text-align: center;
     align-items: center;
-    padding: 10px 20px 10px 20px;
-    margin: 10px;
+    padding: 5px 10px 5px 10px;
+    margin: 8px;
 }
 
 .neu_button:hover {
     cursor: pointer;
+    visibility: visible;
 }
 
 .neu_button_pressed:hover {
@@ -85,9 +64,61 @@ main {
                  -9px -9px 18px #ffffff;
     text-align: center;
     align-items: center;
-    padding: 10px 20px 10px 20px;
-    margin: 10px;
+    padding: 5px 10px 5px 10px;
+    margin: 8px;
 }
+/*------------------------------------------------------------------*/
+
+/* ABOUT SECTION ---------------------------------------------------*/
+.about_section {
+    width: 100%;
+    text-align: justify;
+    overflow: hidden;
+}
+
+.profile_pic {
+    border-radius: 30px;
+    width: 130px;
+    float: left;
+    margin: 0 20px 20px 0;
+}
+/*------------------------------------------------------------------*/
+
+/* PROJECT BOARD ---------------------------------------------------*/
+.board_section {
+    width: 100%;
+}
+
+#board_area {
+    display: flex;
+    flex-wrap: wrap;
+}
+/*------------------------------------------------------------------*/
+
+/* REPO BOXES ------------------------------------------------------*/
+#repoClass {
+    height: 200px;
+}
+
+.board_header {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.github_link {
+    display: inline-block;
+}
+
+.repo_header {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.repo_headername {
+    display: inline-block;
+}
+/*------------------------------------------------------------------*/
 
 /* When the screen is full */
 @media (min-width: 600px) {

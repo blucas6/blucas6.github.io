@@ -3,6 +3,7 @@ const getRepos = `https://api.github.com/users/${user}/repos`;
 const projectArea = 'board_area';
 const boxClassName = 'box';
 const repoClassName = 'repoClass';
+const repoHeader = 'repoHeader';
 var savedDivs = [];
 const github_auth = {}
 
@@ -50,7 +51,8 @@ async function loadGitHubContent(projectDiv)
             
             // decode json and add div to site
             var data = await response.json();
-            addProjectDiv(reponame, data['description'], data['updated_at']);
+            console.log(data);
+            addProjectDiv(reponame, data['description'], data['updated_at'], data['html_url']);
         }
 
         sortRepos();
@@ -70,14 +72,27 @@ async function loadGitHubContent(projectDiv)
 // repo: the name of the repository for the project
 // desc: a description of the project
 // updated_at: last updated date
-function addProjectDiv(repo, desc, updated_at)
+// html_url: the url to the git repo
+function addProjectDiv(repo, desc, updated_at, html_url)
 {
     const newDiv = document.createElement('div');
-    const header = document.createElement('h4');
+    const header = document.createElement('div');
+    const headername = document.createElement('h4');
     const description = document.createElement('p');
     const update = document.createElement('p');
+    const link = document.createElement('a');
     
-    header.textContent = repo;
+    // header
+    headername.className = 'repo_headername';
+    headername.textContent = repo;
+    header.appendChild(headername);
+    link.className = 'neu_button github_link fab fa-github';
+    link.href = html_url;
+    link.target = "_blank";
+    header.appendChild(link);
+    header.className = repoHeader;
+
+    // body
     description.textContent = desc;
     var date = new Date(updated_at);
     update.textContent = `${date.toDateString()}`;
@@ -87,6 +102,7 @@ function addProjectDiv(repo, desc, updated_at)
     newDiv.appendChild(description);
     newDiv.appendChild(update);
 
+    // finish div
     newDiv.className = `${boxClassName} ${repoClassName}`;
     savedDivs.push(newDiv);
 }
@@ -118,6 +134,18 @@ function reOrderRepos()
 {
     var projectDiv = document.getElementById(projectArea);
     sortRepos();
+    var sortbutton = document.getElementById('sortbutton');
+    if (orderByDescending)
+    {
+        sortbutton.innerHTML = "<i class='fas fa-angle-down' style='font-size:24px'></i>";
+        sortbutton.className = 'neu_button_pressed';
+    }
+    else
+    {
+        sortbutton.innerHTML = "<i class='fas fa-angle-up' style='font-size:24px'></i>";
+        sortbutton.className = 'neu_button';
+    }
+    orderByDescending = !orderByDescending;
     // make sure we have the div
     if (!projectDiv)
     {
@@ -143,18 +171,6 @@ function sortRepos()
             return dateB - dateA;
         }
     });
-    var sortbutton = document.getElementById('sortbutton');
-    if (orderByDescending)
-    {
-        sortbutton.innerHTML = "<i class='fas fa-angle-down' style='font-size:24px'></i>";
-        sortbutton.className = 'neu_button_pressed';
-    }
-    else
-    {
-        sortbutton.innerHTML = "<i class='fas fa-angle-up' style='font-size:24px'></i>";
-        sortbutton.className = 'neu_button';
-    }
-    orderByDescending = !orderByDescending;
 }
 
 // Execute on load
