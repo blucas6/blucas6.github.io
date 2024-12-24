@@ -1,7 +1,8 @@
 const user = 'blucas6';
 const getRepos = `https://api.github.com/users/${user}/repos`;
-const projectArea = 'board_are';
+const projectArea = 'board_area';
 const boxClassName = 'box';
+const repoClassName = 'repoClass';
 var savedDivs = [];
 const github_auth = {}
 
@@ -86,7 +87,7 @@ function addProjectDiv(repo, desc, updated_at)
     newDiv.appendChild(description);
     newDiv.appendChild(update);
 
-    newDiv.className = boxClassName;
+    newDiv.className = `${boxClassName} ${repoClassName}`;
     savedDivs.push(newDiv);
 }
 
@@ -146,10 +147,12 @@ function sortRepos()
     if (orderByDescending)
     {
         sortbutton.innerHTML = '&darr;';
+        sortbutton.className = 'neu_button_pressed';
     }
     else
     {
         sortbutton.innerHTML = '&uarr;'
+        sortbutton.className = 'neu_button';
     }
     orderByDescending = !orderByDescending;
 }
