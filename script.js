@@ -1,9 +1,11 @@
 const user = 'blucas6';
 const getRepos = `https://api.github.com/users/${user}/repos`;
-const projectArea = 'board_area';
+const projectArea = 'board_are';
 const boxClassName = 'box';
 var savedDivs = [];
 const github_auth = {}
+
+var orderByDescending = false;
 
 // Go through a users github and add each project to the website
 // ----------------------------------------
@@ -50,20 +52,10 @@ async function loadGitHubContent(projectDiv)
             addProjectDiv(reponame, data['description'], data['updated_at']);
         }
 
-        for (let d of savedDivs)
-        {
-            console.log(d.textContent);
-        }
-        // organize list of divs
-        savedDivs.sort((a, b) => {
-            const dateA = new Date(a.querySelector('.last_update').textContent.trim());
-            const dateB = new Date(b.querySelector('.last_update').textContent.trim());
-            return dateB - dateA;
-        });
+        sortRepos();
 
         // append all of them to the website
         appendAllSavedRepos(projectDiv);
-
     } catch (error) {
         console.log(error);
         return error;
@@ -118,6 +110,48 @@ function appendAllSavedRepos(projectDiv)
     {
         projectDiv.appendChild(repoDiv);
     }
+}
+
+// Action call for the sorting button
+function reOrderRepos()
+{
+    var projectDiv = document.getElementById(projectArea);
+    // make sure we have the div
+    if (!projectDiv)
+    {
+        console.log(`No such thing as ${projectArea}`);
+        return;
+    }
+    sortRepos();
+    appendAllSavedRepos(projectDiv);
+}
+
+// Flip which way the projects are ordered (last update)
+function sortRepos()
+{
+    // organize list of divs
+    savedDivs.sort((a, b) => {
+        const dateA = new Date(a.querySelector('.last_update').textContent.trim());
+        const dateB = new Date(b.querySelector('.last_update').textContent.trim());
+        if (orderByDescending)
+        {
+            return dateA - dateB;
+        }
+        else
+        {
+            return dateB - dateA;
+        }
+    });
+    var sortbutton = document.getElementById('sortbutton');
+    if (orderByDescending)
+    {
+        sortbutton.innerHTML = '&darr;';
+    }
+    else
+    {
+        sortbutton.innerHTML = '&uarr;'
+    }
+    orderByDescending = !orderByDescending;
 }
 
 // Execute on load
