@@ -93,16 +93,17 @@ a {
     display: flex;
     flex-wrap: wrap;
 }
+
+.board_header {
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
 /*------------------------------------------------------------------*/
 
 /* REPO BOXES ------------------------------------------------------*/
 #repoClass {
     height: 200px;
-}
-
-.board_header {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .github_link {
@@ -116,6 +117,10 @@ a {
 }
 
 .repo_headername {
+    display: inline-block;
+}
+
+.github_release {
     display: inline-block;
 }
 /*------------------------------------------------------------------*/

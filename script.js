@@ -1,3 +1,7 @@
+// Icons
+const github_icon = 'fab fa-github';
+const download_icon = 'fas fa-solid fa-download';
+
 const user = 'blucas6';
 const getRepos = `https://api.github.com/users/${user}/repos`;
 const projectArea = 'board_area';
@@ -52,7 +56,27 @@ async function loadGitHubContent(projectDiv)
             // decode json and add div to site
             var data = await response.json();
             console.log(data);
-            addProjectDiv(reponame, data['description'], data['updated_at'], data['html_url']);
+            var release_url = '';
+            if (data['releases_url'])
+            {
+                var url = data['releases_url'].replace("{\/id}", "");;
+                var res = await fetch(url, github_auth);
+                if (res.status === 403)
+                {
+                    return 403;
+                }
+                if (!response.ok)
+                {
+                    return response.statusText;
+                }
+                var release = await res.json();
+                console.log(release);
+                if (release.length > 0)
+                {
+                    release_url = release[0]['zipball_url'];
+                }                
+            }
+            addProjectDiv(reponame, data['description'], data['updated_at'], data['html_url'], release_url);
         }
 
         sortRepos();
@@ -73,7 +97,8 @@ async function loadGitHubContent(projectDiv)
 // desc: a description of the project
 // updated_at: last updated date
 // html_url: the url to the git repo
-function addProjectDiv(repo, desc, updated_at, html_url)
+// release_url: downloadable release url from github
+function addProjectDiv(repo, desc, updated_at, html_url, release_url)
 {
     const newDiv = document.createElement('div');
     const header = document.createElement('div');
@@ -81,15 +106,22 @@ function addProjectDiv(repo, desc, updated_at, html_url)
     const description = document.createElement('p');
     const update = document.createElement('p');
     const link = document.createElement('a');
+    const download = document.createElement('a');
     
     // header
     headername.className = 'repo_headername';
     headername.textContent = repo;
     header.appendChild(headername);
-    link.className = 'neu_button github_link fab fa-github';
+    link.className = `neu_button github_link ${github_icon}`;
     link.href = html_url;
     link.target = "_blank";
     header.appendChild(link);
+    if (release_url)
+    {
+        download.className = `neu_button github_release ${download_icon}`;
+        download.href = release_url;
+        header.appendChild(download);
+    }
     header.className = repoHeader;
 
     // body
