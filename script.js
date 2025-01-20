@@ -9,7 +9,8 @@ const boxClassName = 'box';
 const repoClassName = 'repoClass';
 const repoHeader = 'repoHeader';
 var savedDivs = [];
-const github_auth = {}
+const github_auth = {};
+const gif_repos = ['tkinter-image-viewer'];
 
 var orderByDescending = false;
 
@@ -123,14 +124,23 @@ function addProjectDiv(repo, desc, updated_at, html_url, release_url)
         header.appendChild(download);
     }
     header.className = repoHeader;
+    newDiv.appendChild(header);
 
     // body
+    // gif
+    if (gif_repos.includes(repo))
+    {
+        // add gif
+        const gif = document.createElement('img');
+        gif.src = `projects/${repo}/example.gif`;
+        gif.alt = 'preview gif';
+        newDiv.appendChild(gif);
+    }
     description.textContent = desc;
     var date = new Date(updated_at);
     update.textContent = `${date.toDateString()}`;
     update.className = 'last_update';
 
-    newDiv.appendChild(header);
     newDiv.appendChild(description);
     newDiv.appendChild(update);
 
