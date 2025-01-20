@@ -10,7 +10,8 @@ const repoClassName = 'repoClass';
 const repoHeader = 'repoHeader';
 var savedDivs = [];
 const github_auth = {};
-const gif_repos = ['tkinter-image-viewer'];
+// Add to this list when adding a gif
+const gif_repos = ['tkinter-image-viewer', 'caesar-cipher', 'risk_ai', 'BudgetBuddy', 'DataSetInvestigator'];
 
 var orderByDescending = false;
 
@@ -74,7 +75,7 @@ async function loadGitHubContent(projectDiv)
                 console.log(release);
                 if (release.length > 0)
                 {
-                    release_url = release[0]['zipball_url'];
+                    release_url = release[0]['assets'][0]['browser_download_url'];
                 }                
             }
             addProjectDiv(reponame, data['description'], data['updated_at'], data['html_url'], release_url);
@@ -164,6 +165,7 @@ function githubLimitError(projectDiv)
 // projectDiv: the div to add all projects to
 function appendAllSavedRepos(projectDiv)
 {
+    projectDiv.innerHTML = ''
     // append all saved content
     for (let repoDiv of savedDivs)
     {
@@ -222,6 +224,12 @@ window.onload = async function() {
     // exit if there is no div to place info
     var projectDiv = document.getElementById(projectArea);
 
+    // loading gif
+    const gif = document.createElement('img');
+    gif.src = `loading-gif.gif`;
+    gif.alt = 'loading gif';
+    projectDiv.appendChild(gif);
+
     // make sure we have the div
     if (!projectDiv)
     {
@@ -234,6 +242,7 @@ window.onload = async function() {
         // check for github limit reached
         if (res === 403)
         {
+            projectDiv.innerHTML = ''
             // TODO: save project info in session storage in case of 403
             console.log('Github limit error, nothing saved...');
             // display an the github error
