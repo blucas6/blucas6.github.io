@@ -67,7 +67,7 @@ def getRepoInfo(user: str, repo_list: list):
                         release_download = release_json[0]['assets'][0]['browser_download_url']
             REPO_DICT[repo] = {
                 'desc': rjson['description'],
-                'last_update': rjson['updated_at'],
+                'updated_at': rjson['updated_at'],
                 'html_url': rjson['html_url'],
                 'release_url': release_download
             }
@@ -84,9 +84,9 @@ def writeToJS():
             jsf.write('\trepo'+str(counter)+': {\n')
             jsf.write(f"\t\trepo: '{repo}',\n")
             jsf.write(f"\t\tdesc: '{info['desc']}',\n")
-            date = datetime.strptime(info['last_update'], 
+            date = datetime.strptime(info['updated_at'], 
                             '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')
-            jsf.write(f"\t\tlast_update: '{date}',\n")
+            jsf.write(f"\t\tupdated_at: '{date}',\n")
             jsf.write(f"\t\thtml_url: '{info['html_url']}',\n")
             if info['release_url'] == None:
                 jsf.write('\t\trelease_url: null\n')
