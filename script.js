@@ -1,3 +1,4 @@
+import { repoDictionary } from "./repo.js";
 // Icons
 const github_icon = 'fab fa-github';
 const download_icon = 'fas fa-solid fa-download';
@@ -10,8 +11,15 @@ const repoClassName = 'repoClass';
 const repoHeader = 'repoHeader';
 var savedDivs = [];
 const github_auth = {};
+
 // Add to this list when adding a gif
-const gif_repos = ['tkinter-image-viewer', 'caesar-cipher', 'risk_ai', 'BudgetBuddy', 'DataSetInvestigator'];
+const gif_repos = [
+    'tkinter-image-viewer',
+    'caesar-cipher',
+    'risk_ai',
+    'BudgetBuddy',
+    'DataSetInvestigator'
+];
 
 var orderByDescending = false;
 
@@ -61,7 +69,7 @@ async function loadGitHubContent(projectDiv)
             var release_url = '';
             if (data['releases_url'])
             {
-                var url = data['releases_url'].replace("{\/id}", "");;
+                var url = data['releases_url'].replace("{\/id}", "");
                 var res = await fetch(url, github_auth);
                 if (res.status === 403)
                 {
@@ -217,6 +225,28 @@ function sortRepos()
     });
 }
 
+// Reads from a <repoDictionary> and adds the projects to
+// the <projectDiv> area
+// -------------------------------------------------
+// projectDiv: div to add all projects to
+// repoDictionary: dictionary of all repos and their info
+function loadProjects(projectDiv, repoDictionary)
+{
+    for (const repo in repoDictionary)
+    {
+        const repoInfo = repoDictionary[repo]
+        addProjectDiv(
+            repoInfo['repo'],
+            repoInfo['desc'], 
+            repoInfo['updated_at'],
+            repoInfo['html_url'], 
+            repoInfo['release_url']
+        )
+    }
+    sortRepos()
+    appendAllSavedRepos(projectDiv)
+}
+
 // Execute on load
 window.onload = async function() {
 
@@ -237,25 +267,26 @@ window.onload = async function() {
     }
     else
     {
-        var res = await loadGitHubContent(projectDiv);
+        loadProjects(projectDiv, repoDictionary);
+        // var res = await loadGitHubContent(projectDiv);
 
-        // check for github limit reached
-        if (res === 403)
-        {
-            projectDiv.innerHTML = ''
-            // TODO: save project info in session storage in case of 403
-            console.log('Github limit error, nothing saved...');
-            // display an the github error
-            githubLimitError(projectDiv);
-        }
-        // an actual error has occurred
-        else if (res === -1)
-        {
-            projectDiv.textContent = 'An error has occurred...';
-        }
-        else
-        {
-            console.log(res);
-        }
+        // // check for github limit reached
+        // if (res === 403)
+        // {
+        //     projectDiv.innerHTML = ''
+        //     // TODO: save project info in session storage in case of 403
+        //     console.log('Github limit error, nothing saved...');
+        //     // display an the github error
+        //     githubLimitError(projectDiv);
+        // }
+        // // an actual error has occurred
+        // else if (res === -1)
+        // {
+        //     projectDiv.textContent = 'An error has occurred...';
+        // }
+        // else
+        // {
+        //     console.log(res);
+        // }
     }
 };
