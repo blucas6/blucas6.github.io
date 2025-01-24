@@ -1,0 +1,31 @@
+name: Updater
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  push:
+    branches:
+      - main
+
+jobs:
+  weekly-updater:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Python setup
+        uses: actions/setup-python@v4
+      - name: Run script
+        run: python updater.py
+      - name: Git configuration
+        run: |
+          git config --global user.name "github-actions bot"
+          git config --global user.email "github-action-bot@noreply.github.com"
+      - name: Commit updates
+        run: |
+          git add .
+          git commit -m "Automated update"
+      - name: Push changes
+        run: git push origin main
+      
+      
