@@ -1,4 +1,5 @@
 import { repoDictionary } from "./repo.js";
+
 // Icons
 const github_icon = 'fab fa-github';
 const download_icon = 'fas fa-solid fa-download';

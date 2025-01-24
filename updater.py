@@ -1,9 +1,12 @@
 import requests
 import os
+from datetime import datetime
 
+# projects in this list will not be added to the repo.js file
 PROJECTS_TO_EXCLUDE = [
     'blucas6.github.io'
 ]
+
 FILE_TO_UPDATE = 'repo.js'
 USER = 'blucas6'
 # { <reponame>: { 'desc': <desc>,
@@ -29,6 +32,7 @@ def getAllRepos(user: str):
     '''
     Returns a list of all repos under a <user> from Github
     '''
+    print('[Get Repos from User]')
     repo_url = f'https://api.github.com/users/{user}/repos'
     res = sendRequest(repo_url)
 
@@ -46,6 +50,7 @@ def getRepoInfo(user: str, repo_list: list):
     Takes a <user> and their <repo_list> and pings Github for the 
     rest of the info for that repo
     '''
+    print('[Get info per repo]')
     for repo in repo_list:
         url = f'https://api.github.com/repos/{user}/{repo}'
         res = sendRequest(url)
@@ -71,6 +76,7 @@ def writeToJS():
     '''
     Writes the REPO_DICT to the JS file
     '''
+    print('[Write to file]')
     counter = 0
     with open(FILE_TO_UPDATE, 'w+') as jsf:
         jsf.write('export const repoDictionary = {\n')
@@ -78,7 +84,9 @@ def writeToJS():
             jsf.write('\trepo'+str(counter)+': {\n')
             jsf.write(f"\t\trepo: '{repo}',\n")
             jsf.write(f"\t\tdesc: '{info['desc']}',\n")
-            jsf.write(f"\t\tlast_update: '{info['last_update']}',\n")
+            date = datetime.strptime(info['last_update'], 
+                            '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')
+            jsf.write(f"\t\tlast_update: '{date}',\n")
             jsf.write(f"\t\thtml_url: '{info['html_url']}',\n")
             if info['release_url'] == None:
                 jsf.write('\t\trelease_url: null\n')
