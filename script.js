@@ -22,7 +22,7 @@ const gif_repos = [
     'DataSetInvestigator'
 ];
 
-var orderByDescending = false;
+var earliestDateFirst = false;
 
 // Go through a users github and add each project to the website
 // ----------------------------------------
@@ -186,19 +186,19 @@ function appendAllSavedRepos(projectDiv)
 function reOrderRepos()
 {
     var projectDiv = document.getElementById(projectArea);
-    sortRepos();
     var sortbutton = document.getElementById('sortbutton');
-    if (orderByDescending)
-    {
-        sortbutton.innerHTML = "<i class='fas fa-angle-down' style='font-size:24px'></i>";
-        sortbutton.className = 'neu_button_pressed';
-    }
-    else
+    if (earliestDateFirst)
     {
         sortbutton.innerHTML = "<i class='fas fa-angle-up' style='font-size:24px'></i>";
         sortbutton.className = 'neu_button';
     }
-    orderByDescending = !orderByDescending;
+    else
+    {
+        sortbutton.innerHTML = "<i class='fas fa-angle-down' style='font-size:24px'></i>";
+        sortbutton.className = 'neu_button_pressed';
+    }
+    earliestDateFirst = !earliestDateFirst;
+    sortRepos();
     // make sure we have the div
     if (!projectDiv)
     {
@@ -215,7 +215,7 @@ function sortRepos()
     savedDivs.sort((a, b) => {
         const dateA = new Date(a.querySelector('.last_update').textContent.trim());
         const dateB = new Date(b.querySelector('.last_update').textContent.trim());
-        if (orderByDescending)
+        if (earliestDateFirst)
         {
             return dateA - dateB;
         }
@@ -247,6 +247,9 @@ function loadProjects(projectDiv, repoDictionary)
     sortRepos()
     appendAllSavedRepos(projectDiv)
 }
+
+// Attach function for onClick method
+window.reOrderRepos = reOrderRepos;
 
 // Execute on load
 window.onload = async function() {
