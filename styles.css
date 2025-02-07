@@ -130,6 +130,86 @@ a {
 }
 /*------------------------------------------------------------------*/
 
+/* REPO TAGS -------------------------------------------------------*/
+.tagarearepos {
+    display: flex;
+    gap: 8px;
+}
+
+#tag_area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    height: auto;
+    align-items: center;
+}
+
+#tag_area .repotags:hover {
+    cursor: pointer;
+}
+
+.repotags {
+    padding: 5px;
+    border-radius: 18px;
+    font-size: 12px;
+    user-select: none;
+}
+
+.repotags_pressed 
+{
+    padding: 5px;
+    border-radius: 18px;
+    font-size: 20px;
+    user-select: none;
+}
+
+#tag_area .repotags_pressed:hover {
+    cursor: pointer;
+}
+
+.repotags:hover {
+    cursor: default;
+}
+
+.taggreen {
+    background-color: rgb(204, 226, 165);
+}
+
+.tagblue {
+    background-color: rgb(165, 198, 226);
+}
+
+.tagpurple {
+    background-color: rgb(165, 166, 226);
+}
+
+.tagyellow {
+    background-color: rgb(220, 226, 165);
+}
+
+.tagpink {
+    background-color: rgb(219, 165, 226);
+}
+
+.tagred {
+    background-color: rgb(226, 165, 165);
+}
+
+.tagorange {
+    background-color: rgb(226, 199, 165);
+}
+
+.tagturquoise {
+    background-color: rgb(165, 214, 226);
+}
+
+.tagdarkgreen {
+    background-color: rgb(167, 226, 165);
+}
+
+
+/*------------------------------------------------------------------*/
+
 /* When the screen is full */
 @media (min-width: 600px) {
     .about_section {
@@ -140,6 +220,6 @@ a {
     }
     .repoClass {
         width: 40%;
-        height: 380px;
+        height: 400px;
     }
 }

@@ -7,6 +7,7 @@ const download_icon = 'fas fa-solid fa-download';
 const user = 'blucas6';
 const getRepos = `https://api.github.com/users/${user}/repos`;
 const projectArea = 'board_area';
+const tagArea = 'tag_area'
 const boxClassName = 'box';
 const repoClassName = 'repoClass';
 const repoHeader = 'repoHeader';
@@ -22,7 +23,28 @@ const gif_repos = [
     'DataSetInvestigator'
 ];
 
+// sets the start state for the date ordering switch
 var earliestDateFirst = false;
+
+// Tags to Color Look Up
+const TG_LOOKUP = new Map([
+    ['Data analytics', 'taggreen'],
+    ['GUI', 'tagpink'],
+    ['Desktop app', 'tagblue'],
+    ['Terminal', 'tagred'],
+    ['Game', 'tagorange'],
+    ['Cryptography', 'tagyellow'],
+    ['AI/ML', 'tagturquoise'],
+    ['Single player', 'tagpurple'],
+    ['Simulation', 'tagdarkgreen']
+])
+
+// Creates a map of [<tagname>, false]
+var tagFilter = new Map(
+    [...TG_LOOKUP.keys()].map(
+        key => [key,false]
+    )
+);
 
 // Go through a users github and add each project to the website
 // ----------------------------------------
@@ -109,7 +131,7 @@ async function loadGitHubContent(projectDiv)
 // updated_at: last updated date
 // html_url: the url to the git repo
 // release_url: downloadable release url from github
-function addProjectDiv(repo, desc, updated_at, html_url, release_url)
+function addProjectDiv(repo, desc, updated_at, html_url, release_url, tags)
 {
     const newDiv = document.createElement('div');
     const header = document.createElement('div');
@@ -118,15 +140,18 @@ function addProjectDiv(repo, desc, updated_at, html_url, release_url)
     const update = document.createElement('p');
     const link = document.createElement('a');
     const download = document.createElement('a');
+    const tagarea = document.createElement('div');
     
     // header
     headername.className = 'repo_headername';
     headername.textContent = repo;
     header.appendChild(headername);
+    // source code link
     link.className = `neu_button github_link ${github_icon}`;
     link.href = html_url;
     link.target = "_blank";
     header.appendChild(link);
+    // download release link
     if (release_url)
     {
         download.className = `neu_button github_release ${download_icon}`;
@@ -135,6 +160,28 @@ function addProjectDiv(repo, desc, updated_at, html_url, release_url)
     }
     header.className = repoHeader;
     newDiv.appendChild(header);
+
+    // sub header tags
+    if (tags)
+    {
+        tagarea.className = 'tagarearepos';
+        tags.forEach(tg => {
+            const tag = document.createElement('div');
+            var color = '';
+            if (TG_LOOKUP.has(tg))
+            {
+                color = TG_LOOKUP.get(tg);
+            } 
+            else
+            {
+                console.log(`Missing tag: ${tg}`)
+            }
+            tag.className = 'repotags '+color;
+            tag.textContent = tg;
+            tagarea.appendChild(tag);
+        });
+        newDiv.appendChild(tagarea);
+    }
 
     // body
     // gif
@@ -226,6 +273,68 @@ function sortRepos()
     });
 }
 
+function repoHasTag(repoDiv)
+{
+    const repoName = repoDiv.querySelector('.repo_headername').textContent.trim();
+    for (const repo in repoDictionary)
+    {
+        const repoInfo = repoDictionary[repo];
+        if (repoInfo['repo'] == repoName)
+        {
+            if (repoInfo['tags'] != null)
+            {
+                // Find which tags are selected
+                for (const [tag,select] of tagFilter)
+                {
+                    console.log(repoName, tag, select, repoInfo['tags'].includes(tag))
+                    if (select && !repoInfo['tags'].includes(tag))
+                    {
+                        console.log('FALSE')
+                        return false;
+                    }
+                }
+                console.log('TRUE')
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function sortReposByTag(projectDiv, tagname)
+{
+    if (tagFilter.has(tagname))
+    {
+        tagFilter.set(tagname, !tagFilter.get(tagname));
+        
+        // Clear previous stack
+        projectDiv.innerHTML = '';
+        
+        // Check if filtering
+        if ([...tagFilter.values()].every(val => val === false))
+        {
+            // Not filtering, append all saved repos
+            appendAllSavedRepos(projectDiv);
+        }
+        else
+        {
+            // Find which repos to show the screen
+            for (let repoDiv of savedDivs)
+            {
+                if (repoHasTag(repoDiv))
+                {
+                    projectDiv.appendChild(repoDiv);
+                }
+            }
+        }
+        console.log(tagFilter);
+    }
+    else
+    {
+        console.log('Error: invalid tag name!');
+    }
+}
+
 // Reads from a <repoDictionary> and adds the projects to
 // the <projectDiv> area
 // -------------------------------------------------
@@ -241,22 +350,48 @@ function loadProjects(projectDiv, repoDictionary)
             repoInfo['desc'], 
             repoInfo['updated_at'],
             repoInfo['html_url'], 
-            repoInfo['release_url']
+            repoInfo['release_url'],
+            repoInfo['tags']
         )
     }
     sortRepos()
     appendAllSavedRepos(projectDiv)
 }
 
+function loadTags(projectDiv, tagAreaDiv)
+{
+    TG_LOOKUP.forEach((color, name) => {
+        const tag = document.createElement('div');
+        tag.className = 'repotags '+color;
+        tag.textContent = name;
+        tag.addEventListener("click", e => {
+            if (tagFilter.has(name) && !tagFilter.get(name))
+            {
+                tag.className = 'repotags_pressed '+color;
+            }
+            else
+            {
+                tag.className = 'repotags '+color;
+            }
+            sortReposByTag(projectDiv, name)
+        });
+        tagAreaDiv.appendChild(tag);
+    });
+}
+
 // Attach function for onClick method
 window.reOrderRepos = reOrderRepos;
 
 // Execute on load
-window.onload = async function() {
-
+window.onload = async function()
+{
     // get the area to populate with github info
     // exit if there is no div to place info
     var projectDiv = document.getElementById(projectArea);
+
+    // get the tag area to populate with all possible tags
+    var tagAreaDiv = document.getElementById(tagArea);
+    loadTags(projectDiv, tagAreaDiv);
 
     // loading gif
     const gif = document.createElement('img');
