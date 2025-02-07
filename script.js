@@ -252,7 +252,7 @@ function reOrderRepos()
         console.log(`No such thing as ${projectArea}`);
         return;
     }
-    appendAllSavedRepos(projectDiv);
+    sortReposByTag(projectDiv, '');
 }
 
 // Flip which way the projects are ordered (last update)
@@ -273,11 +273,17 @@ function sortRepos()
     });
 }
 
+// Checks the corresponding JSON entry for that repository
+//  to see if it contains currently filtering tags
+// ------------------------------------
+// repoDiv: the div that holds the repository information
 function repoHasTag(repoDiv)
 {
+    // Get the name of the repo
     const repoName = repoDiv.querySelector('.repo_headername').textContent.trim();
     for (const repo in repoDictionary)
     {
+        // Find the JSON
         const repoInfo = repoDictionary[repo];
         if (repoInfo['repo'] == repoName)
         {
@@ -286,14 +292,13 @@ function repoHasTag(repoDiv)
                 // Find which tags are selected
                 for (const [tag,select] of tagFilter)
                 {
-                    console.log(repoName, tag, select, repoInfo['tags'].includes(tag))
+                    // If a tag is selected but not in the list, exit
                     if (select && !repoInfo['tags'].includes(tag))
                     {
-                        console.log('FALSE')
                         return false;
                     }
                 }
-                console.log('TRUE')
+                // Selected tags are in the list of tags
                 return true;
             }
         }
@@ -301,37 +306,38 @@ function repoHasTag(repoDiv)
     return false;
 }
 
+// Activated by clicking a tag, filters repository divs
+//  by the selected tags
+// ----------------------------------
+// projectDiv: the div that holds the repos
+// tagname: the tag that was selected
 function sortReposByTag(projectDiv, tagname)
 {
     if (tagFilter.has(tagname))
     {
+        // Flip the tag selected
         tagFilter.set(tagname, !tagFilter.get(tagname));
         
-        // Clear previous stack
-        projectDiv.innerHTML = '';
-        
-        // Check if filtering
-        if ([...tagFilter.values()].every(val => val === false))
-        {
-            // Not filtering, append all saved repos
-            appendAllSavedRepos(projectDiv);
-        }
-        else
-        {
-            // Find which repos to show the screen
-            for (let repoDiv of savedDivs)
-            {
-                if (repoHasTag(repoDiv))
-                {
-                    projectDiv.appendChild(repoDiv);
-                }
-            }
-        }
-        console.log(tagFilter);
+    }
+    // Clear previous stack
+    projectDiv.innerHTML = '';
+    
+    // Check if filtering
+    if ([...tagFilter.values()].every(val => val === false))
+    {
+        // Not filtering, append all saved repos
+        appendAllSavedRepos(projectDiv);
     }
     else
     {
-        console.log('Error: invalid tag name!');
+        // Find which repos to show the screen
+        for (let repoDiv of savedDivs)
+        {
+            if (repoHasTag(repoDiv))
+            {
+                projectDiv.appendChild(repoDiv);
+            }
+        }
     }
 }
 
@@ -358,6 +364,10 @@ function loadProjects(projectDiv, repoDictionary)
     appendAllSavedRepos(projectDiv)
 }
 
+// Load all tags in the project at the top of the board
+// ---------------------------------
+// projectDiv: the div that holds the repo divs
+// tagAreaDiv: the area to place all tags
 function loadTags(projectDiv, tagAreaDiv)
 {
     TG_LOOKUP.forEach((color, name) => {
