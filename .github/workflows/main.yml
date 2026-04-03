@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
       - name: Python dependencies
-        run: pip install requests
+        run: pip install -r requirements.txt
       - name: Run script
         run: python updater.py
       - name: Git configuration
