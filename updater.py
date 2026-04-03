@@ -103,7 +103,7 @@ def writeToJS():
             for repo, info in REPO_DICT.items():
                 jsf.write('\trepo'+str(counter)+': {\n')
                 jsf.write(f"\t\trepo: '{repo}',\n")
-                jsf.write(f"\t\tdesc: '{info['desc']}',\n")
+                jsf.write(f"\t\tdesc: \"{info['desc']}\",\n")
                 date = datetime.strptime(info['updated_at'], 
                                 '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')
                 jsf.write(f"\t\tupdated_at: '{date}',\n")
