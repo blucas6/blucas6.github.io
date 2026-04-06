@@ -135,4 +135,12 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
+	repo17: {
+		repo: 'mud',
+		desc: "None",
+		updated_at: '2025-11-21',
+		html_url: 'https://github.com/blucas6/mud',
+		release_url: null,
+		tags: null
+	},
 }
