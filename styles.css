@@ -1,8 +1,12 @@
 /* GLOBAL ----------------------------------------------------------*/
+:root {
+    --bgcolor: #dfcca5;
+    --fgcolor: #e9d8b6;
+    --brcolor: #555353;
+}
 body {
     font-family: 'Nunito Sans';
-    background-color: #12b0cd;
-    background-image: url('romanstatue.jpg');
+    background-color: var(--bgcolor);
 }
 
 main {
@@ -21,39 +25,45 @@ a {
 
 /* Box -------------------------------------------------------------*/
 .box {
-    background: #f0eade;
+    background: var(--fgcolor); 
+    border: 1px solid var(--brcolor);
     padding: 20px;
     width: 100%;
     margin: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 /* Button ----------------------------------------------------------*/
-.neu_button {
-    border-radius: 50px;
-    background: linear-gradient(145deg, #fbfaff, #d4d3d7);
-    box-shadow:  9px 9px 18px #c8c7cb,
-                 -9px -9px 18px #ffffff;
-    text-align: center;
-    align-items: center;
-    padding: 5px 10px 5px 10px;
-    margin: 8px;
+#sortbutton {
+    vertical-align: middle;
+    padding: 18px 10px 0px 10px;
+    border: 1px solid var(--brcolor);
+    border-radius: 20%;
 }
 
-.neu_button:hover {
+#sortbutton:hover {
     cursor: pointer;
     visibility: visible;
 }
 
-.neu_button_pressed:hover {
+.button {
+    border-radius: 50px;
+    text-align: center;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+}
+
+.button:hover {
+    cursor: pointer;
+    visibility: visible;
+}
+
+.button_pressed:hover {
     cursor: pointer;
 }
 
-.neu_button_pressed {
+.button_pressed {
     border-radius: 50px;
-    background: linear-gradient(145deg, #d4d3d7, #fbfaff);
-    box-shadow:  9px 9px 18px #c8c7cb,
-                 -9px -9px 18px #ffffff;
     text-align: center;
     align-items: center;
     padding: 5px 10px 5px 10px;
@@ -90,6 +100,7 @@ a {
 
 .board_header {
     gap: 10px;
+    width: 88%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -147,14 +158,15 @@ a {
     border-radius: 18px;
     font-size: 12px;
     user-select: none;
+    border: 1px solid var(--brcolor);
 }
 
-.repotags_pressed 
-{
+.repotags_pressed {
     padding: 5px;
     border-radius: 18px;
     font-size: 20px;
     user-select: none;
+    border: 1px solid var(--brcolor);
 }
 
 #tag_area .repotags_pressed:hover {

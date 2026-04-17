@@ -147,14 +147,14 @@ function addProjectDiv(repo, desc, updated_at, html_url, release_url, tags)
     headername.textContent = repo;
     header.appendChild(headername);
     // source code link
-    link.className = `neu_button github_link ${github_icon}`;
+    link.className = `button github_link ${github_icon}`;
     link.href = html_url;
     link.target = "_blank";
     header.appendChild(link);
     // download release link
     if (release_url)
     {
-        download.className = `neu_button github_release ${download_icon}`;
+        download.className = `button github_release ${download_icon}`;
         download.href = release_url;
         header.appendChild(download);
     }
@@ -237,12 +237,10 @@ function reOrderRepos()
     if (earliestDateFirst)
     {
         sortbutton.innerHTML = "<i class='fas fa-angle-up' style='font-size:24px'></i>";
-        sortbutton.className = 'neu_button';
     }
     else
     {
         sortbutton.innerHTML = "<i class='fas fa-angle-down' style='font-size:24px'></i>";
-        sortbutton.className = 'neu_button_pressed';
     }
     earliestDateFirst = !earliestDateFirst;
     sortRepos();
