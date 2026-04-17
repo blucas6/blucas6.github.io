@@ -157,6 +157,78 @@ export const repoDictionary = {
 		updated_at: '2025-02-19',
 		html_url: 'https://github.com/blucas6/populationsim',
 		release_url: null,
+		tags: ['Simulation']
+	},
+	repo20: {
+		repo: 'realms',
+		desc: "Multiplayer dwarf fortress",
+		updated_at: '2023-06-03',
+		html_url: 'https://github.com/blucas6/realms',
+		release_url: null,
+		tags: null
+	},
+	repo21: {
+		repo: 'risk_ai',
+		desc: "Reinforcement learning in Risk",
+		updated_at: '2025-02-05',
+		html_url: 'https://github.com/blucas6/risk_ai',
+		release_url: null,
+		tags: ['Simulation', 'Terminal', 'AI/ML']
+	},
+	repo22: {
+		repo: 'rogueai',
+		desc: "testing out machine learning in a roguelike",
+		updated_at: '2026-03-08',
+		html_url: 'https://github.com/blucas6/rogueai',
+		release_url: null,
+		tags: null
+	},
+	repo23: {
+		repo: 'roguelike',
+		desc: "None",
+		updated_at: '2022-05-17',
+		html_url: 'https://github.com/blucas6/roguelike',
+		release_url: null,
+		tags: null
+	},
+	repo24: {
+		repo: 'sierpinski-triangle',
+		desc: "Exploration of the chaos game and the fractals that appear in a shape with 3,4,5 and 6 points.",
+		updated_at: '2025-02-18',
+		html_url: 'https://github.com/blucas6/sierpinski-triangle',
+		release_url: null,
+		tags: ['Simulation', 'Math']
+	},
+	repo25: {
+		repo: 'sorting',
+		desc: "Visualizing sorting algorithms",
+		updated_at: '2025-02-19',
+		html_url: 'https://github.com/blucas6/sorting',
+		release_url: null,
+		tags: ['Simulation', 'Math']
+	},
+	repo26: {
+		repo: 'tintask',
+		desc: "Lightweight, command line task tracking tool",
+		updated_at: '2026-03-08',
+		html_url: 'https://github.com/blucas6/tintask',
+		release_url: 'https://github.com/blucas6/tintask/releases/download/v1.0.0/tintask.exe',
+		tags: null
+	},
+	repo27: {
+		repo: 'tkinter-image-viewer',
+		desc: "Simple GUI made in tkinter to view and add captions to images.",
+		updated_at: '2025-02-07',
+		html_url: 'https://github.com/blucas6/tkinter-image-viewer',
+		release_url: 'https://github.com/blucas6/tkinter-image-viewer/releases/download/v1.0/main.exe',
+		tags: ['GUI', 'Desktop app']
+	},
+	repo28: {
+		repo: 'winhaven',
+		desc: "None",
+		updated_at: '2024-03-21',
+		html_url: 'https://github.com/blucas6/winhaven',
+		release_url: null,
 		tags: null
 	},
 }
