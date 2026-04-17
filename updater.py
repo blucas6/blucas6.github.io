@@ -1,7 +1,10 @@
 import requests
+import time
 import os
 from datetime import datetime
 import base64
+
+GH_RATE_LIMIT_WAIT = 60
 
 # projects in this list will not be added to the repo.js file
 PROJECTS_TO_EXCLUDE = [
@@ -54,43 +57,48 @@ def getRepoInfo(user: str, repo_list: list):
     print('[Get info per repo]')
     # Go through repo list
     for repo in repo_list:
-        url = f'https://api.github.com/repos/{user}/{repo}'
-        res = sendRequest(url)
-        if res.status_code == 200:
-            rjson = res.json()
-            release_download = None
-            # check if repo contains a release url
-            if rjson['releases_url']:
-                url = rjson['releases_url'].replace('{/id}','')
-                release_res = sendRequest(url)
-                if release_res.status_code == 200:
-                    release_json = release_res.json()
-                    if len(release_json) > 0:
-                        release_download = release_json[0]['assets'][0]['browser_download_url']
-            # check for readme
-            readme_url = f'https://api.github.com/repos/{user}/{repo}/readme'
-            readme_res = sendRequest(readme_url)
-            tags = None
-            if readme_res.status_code == 200:
-                readme64 = readme_res.json()['content']
-                readme = base64.b64decode(readme64).decode('utf-8')
-                lines = readme.split('\n')
-                tags = [lines[i+1].split(',')
-                        for i,line in enumerate(lines) if line == '## Tags']
-                if tags:
-                    tags = [t.strip() for t in tags[0]]
-                print(tags)
-            REPO_DICT[repo] = {
-                'desc': rjson['description'],
-                'updated_at': rjson['updated_at'],
-                'html_url': rjson['html_url'],
-                'release_url': release_download,
-                'tags': tags
-            }
-        elif res.status_code == 403:
-            print('GitHub rate limit reached!')
-        else:
-            print(f'Failed ({res.status_code})')
+        while True:
+            url = f'https://api.github.com/repos/{user}/{repo}'
+            res = sendRequest(url)
+            if res.status_code == 200:
+                rjson = res.json()
+                release_download = None
+                # check if repo contains a release url
+                if rjson['releases_url']:
+                    url = rjson['releases_url'].replace('{/id}','')
+                    release_res = sendRequest(url)
+                    if release_res.status_code == 200:
+                        release_json = release_res.json()
+                        if len(release_json) > 0:
+                            release_download = release_json[0]['assets'][0]['browser_download_url']
+                # check for readme
+                readme_url = f'https://api.github.com/repos/{user}/{repo}/readme'
+                readme_res = sendRequest(readme_url)
+                tags = None
+                if readme_res.status_code == 200:
+                    readme64 = readme_res.json()['content']
+                    readme = base64.b64decode(readme64).decode('utf-8')
+                    lines = readme.split('\n')
+                    tags = [lines[i+1].split(',')
+                            for i,line in enumerate(lines) if line == '## Tags']
+                    if tags:
+                        tags = [t.strip() for t in tags[0]]
+                    print(tags)
+                REPO_DICT[repo] = {
+                    'desc': rjson['description'],
+                    'updated_at': rjson['updated_at'],
+                    'html_url': rjson['html_url'],
+                    'release_url': release_download,
+                    'tags': tags
+                }
+                break
+            elif res.status_code == 403:
+                print('GitHub rate limit reached!')
+                time.sleep(GH_RATE_LIMIT_WAIT)
+            else:
+                print(f'Failed ({res.status_code})')
+                break
+
 def writeToJS():
     '''
     Writes the REPO_DICT to the JS file

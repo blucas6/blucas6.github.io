@@ -143,4 +143,20 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
+	repo18: {
+		repo: 'personal-finance',
+		desc: "Simple personal finance application to help you save money.",
+		updated_at: '2023-04-20',
+		html_url: 'https://github.com/blucas6/personal-finance',
+		release_url: null,
+		tags: null
+	},
+	repo19: {
+		repo: 'populationsim',
+		desc: "Exploding population simulation",
+		updated_at: '2025-02-19',
+		html_url: 'https://github.com/blucas6/populationsim',
+		release_url: null,
+		tags: null
+	},
 }
