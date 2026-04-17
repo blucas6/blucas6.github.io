@@ -99,8 +99,8 @@ a {
 }
 
 .board_header {
-    gap: 10px;
-    width: 88%;
+    gap: 20px;
+    width: auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -232,7 +232,7 @@ a {
 
 /* Phone screen */
 @media (max-width: 768px) {
-    .board_header {
-        width: 83%;
+    .box {
+        margin: 9px;
     }
 }
