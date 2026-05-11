@@ -157,7 +157,7 @@ export const repoDictionary = {
 		updated_at: '2025-02-19',
 		html_url: 'https://github.com/blucas6/populationsim',
 		release_url: null,
-		tags: ['Simulation']
+		tags: null
 	},
 	repo20: {
 		repo: 'realms',
@@ -210,7 +210,7 @@ export const repoDictionary = {
 	repo26: {
 		repo: 'tintask',
 		desc: "Lightweight, command line task tracking tool",
-		updated_at: '2026-04-17',
+		updated_at: '2026-05-02',
 		html_url: 'https://github.com/blucas6/tintask',
 		release_url: 'https://github.com/blucas6/tintask/releases/download/v1.0.0/tintask.exe',
 		tags: null
