@@ -66,7 +66,7 @@ export const repoDictionary = {
 	repo8: {
 		repo: 'crestet',
 		desc: "None",
-		updated_at: '2026-06-21',
+		updated_at: '2026-06-29',
 		html_url: 'https://github.com/blucas6/crestet',
 		release_url: null,
 		tags: null
