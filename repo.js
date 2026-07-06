@@ -66,7 +66,7 @@ export const repoDictionary = {
 	repo8: {
 		repo: 'crestet',
 		desc: "None",
-		updated_at: '2026-06-29',
+		updated_at: '2026-07-04',
 		html_url: 'https://github.com/blucas6/crestet',
 		release_url: null,
 		tags: null
@@ -157,7 +157,7 @@ export const repoDictionary = {
 		updated_at: '2025-02-19',
 		html_url: 'https://github.com/blucas6/populationsim',
 		release_url: null,
-		tags: ['Simulation']
+		tags: null
 	},
 	repo20: {
 		repo: 'realms',
