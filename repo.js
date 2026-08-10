@@ -66,7 +66,7 @@ export const repoDictionary = {
 	repo8: {
 		repo: 'crestet',
 		desc: "Roguelike game with RL/ML environment",
-		updated_at: '2026-08-02',
+		updated_at: '2026-08-08',
 		html_url: 'https://github.com/blucas6/crestet',
 		release_url: null,
 		tags: null
@@ -120,6 +120,14 @@ export const repoDictionary = {
 		tags: ['Multiplayer', 'Game']
 	},
 	repo15: {
+		repo: 'llm-arena',
+		desc: "None",
+		updated_at: '2026-08-09',
+		html_url: 'https://github.com/blucas6/llm-arena',
+		release_url: null,
+		tags: null
+	},
+	repo16: {
 		repo: 'Lost-and-Found-Project',
 		desc: "Project repository for a lost and found website for Stevens University. -Software Fundamentals 540",
 		updated_at: '2023-02-16',
@@ -127,7 +135,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
-	repo16: {
+	repo17: {
 		repo: 'miniQuest',
 		desc: "mini roguelike",
 		updated_at: '2024-12-23',
@@ -135,7 +143,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
-	repo17: {
+	repo18: {
 		repo: 'mud',
 		desc: "None",
 		updated_at: '2025-11-21',
@@ -143,7 +151,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
-	repo18: {
+	repo19: {
 		repo: 'personal-finance',
 		desc: "Simple personal finance application to help you save money.",
 		updated_at: '2023-04-20',
@@ -151,7 +159,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
-	repo19: {
+	repo20: {
 		repo: 'populationsim',
 		desc: "Exploding population simulation",
 		updated_at: '2025-02-19',
@@ -159,7 +167,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: ['Simulation']
 	},
-	repo20: {
+	repo21: {
 		repo: 'realms',
 		desc: "Multiplayer dwarf fortress",
 		updated_at: '2023-06-03',
@@ -167,7 +175,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
-	repo21: {
+	repo22: {
 		repo: 'risk_ai',
 		desc: "Reinforcement learning in Risk",
 		updated_at: '2025-02-05',
@@ -175,7 +183,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: ['Simulation', 'Terminal', 'AI/ML']
 	},
-	repo22: {
+	repo23: {
 		repo: 'rogueai',
 		desc: "testing out machine learning in a roguelike",
 		updated_at: '2026-03-08',
@@ -183,7 +191,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
-	repo23: {
+	repo24: {
 		repo: 'roguelike',
 		desc: "None",
 		updated_at: '2022-05-17',
@@ -191,7 +199,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: null
 	},
-	repo24: {
+	repo25: {
 		repo: 'sierpinski-triangle',
 		desc: "Exploration of the chaos game and the fractals that appear in a shape with 3,4,5 and 6 points.",
 		updated_at: '2025-02-18',
@@ -199,7 +207,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: ['Simulation', 'Math']
 	},
-	repo25: {
+	repo26: {
 		repo: 'sorting',
 		desc: "Visualizing sorting algorithms",
 		updated_at: '2025-02-19',
@@ -207,7 +215,7 @@ export const repoDictionary = {
 		release_url: null,
 		tags: ['Simulation', 'Math']
 	},
-	repo26: {
+	repo27: {
 		repo: 'tintask',
 		desc: "Lightweight, command line task tracking tool",
 		updated_at: '2026-05-02',
@@ -215,20 +223,12 @@ export const repoDictionary = {
 		release_url: 'https://github.com/blucas6/tintask/releases/download/v1.0.0/tintask.exe',
 		tags: null
 	},
-	repo27: {
+	repo28: {
 		repo: 'tkinter-image-viewer',
 		desc: "Simple GUI made in tkinter to view and add captions to images.",
 		updated_at: '2025-02-07',
 		html_url: 'https://github.com/blucas6/tkinter-image-viewer',
 		release_url: 'https://github.com/blucas6/tkinter-image-viewer/releases/download/v1.0/main.exe',
 		tags: ['GUI', 'Desktop app']
-	},
-	repo28: {
-		repo: 'winhaven',
-		desc: "None",
-		updated_at: '2024-03-21',
-		html_url: 'https://github.com/blucas6/winhaven',
-		release_url: null,
-		tags: null
 	},
 }
