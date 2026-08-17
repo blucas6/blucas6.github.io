@@ -122,7 +122,7 @@ export const repoDictionary = {
 	repo15: {
 		repo: 'llm-arena',
 		desc: "None",
-		updated_at: '2026-08-09',
+		updated_at: '2026-08-16',
 		html_url: 'https://github.com/blucas6/llm-arena',
 		release_url: null,
 		tags: null
