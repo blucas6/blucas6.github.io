@@ -66,7 +66,7 @@ export const repoDictionary = {
 	repo8: {
 		repo: 'crestet',
 		desc: "Roguelike game with RL/ML environment",
-		updated_at: '2026-10-17',
+		updated_at: '2026-10-20',
 		html_url: 'https://github.com/blucas6/crestet',
 		release_url: null,
 		tags: null
